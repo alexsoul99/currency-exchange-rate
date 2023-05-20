@@ -8,6 +8,6 @@
 	}
 
 	body {
-		@apply bg-[url(/forex-14.jpg)];
+		@apply bg-sky-900 md:bg-[url(/forex-14.jpg)];
 	}
 }
