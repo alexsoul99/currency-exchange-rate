@@ -35,7 +35,7 @@ export default function App() {
 
 	return (
 		<main className='flex flex-col items-center justify-center h-screen backdrop-blur'>
-			<article className='bg-cyan-600 bg-opacity-75 p-10 rounded-2xl shadow-2xl shadow-emerald-950 hover:backdrop-blur-xl hover:scale-105 ease-in-out duration-500'>
+			<article className='bg-cyan-600 bg-opacity-75 p-10 rounded-2xl shadow-2xl shadow-emerald-950'>
 				<Header />
 				<form
 					className='flex flex-col items-start py-4'
@@ -82,7 +82,7 @@ export default function App() {
 						<button
 							type='submit'
 							disabled={loadingResult}
-							className='px-3 py-2 bg-slate-600 text-gray-300 text-lg rounded-lg mt-6 shadow-lg shadow-slate-900 self-center hover:bg-slate-700 hover:scale-105 disabled:opacity-750'
+							className='px-3 py-2 bg-slate-600 text-gray-300 text-lg rounded-lg mt-6 shadow-lg shadow-slate-900 self-center hover:bg-slate-700 hover:scale-105 disabled:opacity-75 disabled:hover:scale-100'
 						>
 							{loadingResult ? (
 								<Image
