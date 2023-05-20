@@ -82,7 +82,7 @@ export default function App() {
 						<button
 							type='submit'
 							disabled={loadingResult}
-							className='px-3 py-2 bg-slate-600 text-gray-300 text-lg rounded-lg mt-6 shadow-lg shadow-slate-900 self-center hover:bg-slate-700 hover:scale-105 disabled:opacity-75 disabled:hover:scale-100'
+							className='px-3 py-2 bg-slate-600 text-gray-300 text-lg rounded-lg mt-6 shadow-lg shadow-slate-900 self-center hover:bg-slate-700 hover:scale-105 disabled:opacity-75 disabled:hover:scale-100 disabled:hover:bg-slate-600'
 						>
 							{loadingResult ? (
 								<Image
