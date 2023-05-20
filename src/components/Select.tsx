@@ -42,7 +42,7 @@ export default function Select({
 				</span>
 			)}
 			{error && (
-				<span className='text-gray-500 font-bold text-xl flex justify-center items-center'>
+				<span className='text-red-500 flex-wrap w-[25rem] font-bold text-xl flex justify-center items-center'>
 					{error}
 				</span>
 			)}

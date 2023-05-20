@@ -10,8 +10,8 @@ import { useCurrencies } from '@/hooks/useCurrencies'
 
 export default function App() {
 	const [convertedAmount, setConvertedAmount] = useState<number>()
-	const [toValue, setToValue] = useState<string | undefined>()
-	const [fromValue, setFromValue] = useState<string | undefined>()
+	const [toValue, setToValue] = useState<string>('')
+	const [fromValue, setFromValue] = useState<string>('')
 	const [amountValue, setAmountValue] = useState<number | null>(1)
 	const [inputError, setInputError] = useState<string>()
 	const { currencies, error, isLoading } = useCurrencies()
@@ -23,6 +23,7 @@ export default function App() {
 
 		getConvertion(toValue, fromValue, amountValue)
 			.then(({ data }): void => {
+				console.log(toValue, fromValue, amountValue)
 				const result: number = data.result
 				setConvertedAmount(result)
 			})

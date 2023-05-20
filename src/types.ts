@@ -17,7 +17,7 @@ export type FormProps = {
 }
 
 export type SelectProps = {
-	value: string | undefined
+	value: string
 	options: Array<Currency>
 	isLoading: boolean
 	error: string
