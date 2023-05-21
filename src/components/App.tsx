@@ -1,37 +1,22 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { getConvertion } from '@/services/getConvertion'
-import { handleSelectChange } from '@/logic/handleSelectChange'
-import { handleInputChange } from '@/logic/handleInputChange'
 import Select from './Select'
 import Header from './Header'
 import Result from './Result'
 import { useCurrencies } from '@/hooks/useCurrencies'
+import { useHandleSubmit } from '@/hooks/useHandleSubmit'
+import { useHandleInputChange } from '@/hooks/useHandleInputChange'
 
 export default function App() {
-	const [convertedAmount, setConvertedAmount] = useState<number>()
-	const [toValue, setToValue] = useState<string>('')
-	const [fromValue, setFromValue] = useState<string>('')
-	const [amountValue, setAmountValue] = useState<number | null>(1)
-	const [inputError, setInputError] = useState<string>()
+	const { amountValue, inputError, handleInputChange } = useHandleInputChange()
 	const { currencies, error, isLoading } = useCurrencies()
-	const [loadingResult, setLoadingResult] = useState<boolean>()
-
-	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault()
-		setLoadingResult(true)
-
-		getConvertion(toValue, fromValue, amountValue)
-			.then(({ data }): void => {
-				console.log(toValue, fromValue, amountValue)
-				const result: number = data.result
-				setConvertedAmount(result)
-			})
-			.catch((err) => {
-				if (err instanceof Error) return alert(err.message)
-			})
-			.finally(() => setLoadingResult(false))
-	}
+	const [fromValue, setFromValue] = useState<string>('USD')
+	const [toValue, setToValue] = useState<string>('EUR')
+	const { convertedAmount, loadingResult, handleSubmit } = useHandleSubmit(
+		amountValue ?? 1,
+		toValue,
+		fromValue
+	)
 
 	return (
 		<main className='flex flex-col items-center justify-center h-screen backdrop-blur'>
@@ -50,9 +35,7 @@ export default function App() {
 						placeholder='10.0'
 						value={amountValue ?? 0}
 						onChange={(e) => {
-							const { numberInput, inputError } = handleInputChange(e)
-							setInputError(inputError)
-							setAmountValue(numberInput)
+							handleInputChange(e)
 						}}
 					/>
 					{inputError && <span className='text-red-600'>{inputError}</span>}
@@ -61,7 +44,7 @@ export default function App() {
 						<Select
 							value={fromValue}
 							handleSelectChange={(e) => {
-								const { newValue } = handleSelectChange(e)
+								const newValue = e.target.value
 								setFromValue(newValue)
 							}}
 							options={currencies!}
@@ -72,7 +55,7 @@ export default function App() {
 						<Select
 							value={toValue}
 							handleSelectChange={(e) => {
-								const { newValue } = handleSelectChange(e)
+								const newValue = e.target.value
 								setToValue(newValue)
 							}}
 							options={currencies!}

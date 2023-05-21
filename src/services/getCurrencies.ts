@@ -2,8 +2,9 @@ import { API_URL, REQUEST_OPTIONS } from '../constants'
 import { Currency } from '../types'
 
 export async function getCurrencies() {
-	const res = await fetch(`${API_URL}symbols`, REQUEST_OPTIONS)
-	if (res.ok) {
+	try {
+		const res = await fetch(`${API_URL}symbols`, REQUEST_OPTIONS)
+
 		const data = await res.json()
 
 		const transformObject = Object.entries<[string, string]>(data.symbols).map(
@@ -16,7 +17,10 @@ export async function getCurrencies() {
 			}
 		)
 		return transformObject
-	} else {
-		throw new Error('Something went wrong with the response')
+	} catch (err) {
+		if (err instanceof Error)
+			throw new Error(
+				`Something went wrong with the response. Error: ${err.message}`
+			)
 	}
 }
