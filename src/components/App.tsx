@@ -13,7 +13,7 @@ export default function App() {
 	const [fromValue, setFromValue] = useState<string>('USD')
 	const [toValue, setToValue] = useState<string>('EUR')
 	const { convertedAmount, loadingResult, handleSubmit } = useHandleSubmit(
-		amountValue ?? 1,
+		amountValue!,
 		toValue,
 		fromValue
 	)
@@ -32,8 +32,9 @@ export default function App() {
 					<input
 						className='p-3 mb-4 w-[230px] bg-slate-600 rounded-lg text-gray-200 focus:outline-1 focus:outline-sky-400 focus:border-none shadow-lg shadow-slate-900 hover:scale-105 ease-in-out duration-200'
 						name='amountInput'
+						type='number'
 						placeholder='10.0'
-						value={amountValue ?? 0}
+						value={amountValue!}
 						onChange={(e) => {
 							handleInputChange(e)
 						}}
